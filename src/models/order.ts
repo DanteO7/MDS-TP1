@@ -1,12 +1,15 @@
+import { OrderStatus } from "../enums/OrderStatus";
+import { TransactionType } from "../enums/TransactionType";
+
 export class Order {
   id: string;
   userId: string;
   type: "market";
-  action: "buy" | "sell";
+  action: TransactionType;
   symbol: string;
   quantity: number;
   price?: number;
-  status: "pending" | "executed" | "cancelled";
+  status: OrderStatus;
   createdAt: Date;
   executedAt?: Date;
 
@@ -14,7 +17,7 @@ export class Order {
     id: string,
     userId: string,
     type: "market",
-    action: "buy" | "sell",
+    action: TransactionType,
     symbol: string,
     quantity: number,
     price?: number
@@ -26,16 +29,16 @@ export class Order {
     this.symbol = symbol;
     this.quantity = quantity;
     this.price = price;
-    this.status = "pending";
+    this.status = OrderStatus.PENDING;
     this.createdAt = new Date();
   }
 
   execute(): void {
-    this.status = "executed";
+    this.status = OrderStatus.EXECUTED;
     this.executedAt = new Date();
   }
 
   cancel(): void {
-    this.status = "cancelled";
+    this.status = OrderStatus.CANCELLED;
   }
 }

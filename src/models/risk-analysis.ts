@@ -1,20 +1,22 @@
+import { Risks } from "../enums/Risks";
+
 export class RiskAnalysis {
   userId: string;
-  portfolioRisk: "low" | "medium" | "high";
+  portfolioRisk: Risks;
   diversificationScore: number;
   recommendations: string[];
   calculatedAt: Date;
 
   constructor(userId: string) {
     this.userId = userId;
-    this.portfolioRisk = "medium";
+    this.portfolioRisk = Risks.MEDIUM;
     this.diversificationScore = 0;
     this.recommendations = [];
     this.calculatedAt = new Date();
   }
 
   updateRisk(
-    risk: "low" | "medium" | "high",
+    risk: Risks,
     diversificationScore: number,
     recommendations: string[]
   ): void {

@@ -1,10 +1,9 @@
 // Servicio de simulación de mercado
 import { config } from "../../config/config";
-import {
-  IMarketObserver,
-  MarketPricesUpdater,
-  PortfoliosUpdater,
-} from "./observer/observer";
+import { MarketEventType } from "../../enums/MarketEventType";
+import { IMarketObserver } from "./observer/IMarketObserver";
+import { MarketPricesUpdater } from "./observer/MarketPricesUpdater";
+import { PortfoliosUpdater } from "./observer/PortfoliosUpdater";
 
 export class MarketSimulationService {
   private isRunning: boolean = false;
@@ -59,22 +58,22 @@ export class MarketSimulationService {
   }
 
   // Simular evento de mercado específico
-  simulateMarketEvent(eventType: "bull" | "bear" | "crash" | "recovery"): void {
+  simulateMarketEvent(eventType: MarketEventType): void {
     console.log(`Simulando evento de mercado: ${eventType}`);
 
     let impactFactor: number = 0;
 
     switch (eventType) {
-      case "bull":
+      case MarketEventType.BULL:
         impactFactor = 0.05 + Math.random() * 0.1; // +5% a +15%
         break;
-      case "bear":
+      case MarketEventType.BEAR:
         impactFactor = -(0.05 + Math.random() * 0.1); // -5% a -15%
         break;
-      case "crash":
+      case MarketEventType.CRASH:
         impactFactor = -(0.15 + Math.random() * 0.2); // -15% a -35%
         break;
-      case "recovery":
+      case MarketEventType.RECOVERY:
         impactFactor = 0.1 + Math.random() * 0.15; // +10% a +25%
         break;
     }

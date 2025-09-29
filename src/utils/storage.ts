@@ -1,6 +1,7 @@
 // Almacenamiento en memoria
 
 import { config } from "../config/config";
+import { Risks } from "../enums/Risks";
 import { Asset } from "../models/asset";
 import { MarketData } from "../models/market-data";
 import { Order } from "../models/order";
@@ -31,7 +32,7 @@ class InMemoryStorage {
         "demo@example.com",
         "demo-key-123",
         10000.0,
-        "medium"
+        Risks.MEDIUM
       ),
       new User(
         "admin_user",
@@ -39,7 +40,7 @@ class InMemoryStorage {
         "admin@example.com",
         "admin-key-456",
         50000.0,
-        "high"
+        Risks.HIGH
       ),
       new User(
         "trader_user",
@@ -47,7 +48,7 @@ class InMemoryStorage {
         "trader@example.com",
         "trader-key-789",
         25000.0,
-        "low"
+        Risks.LOW
       ),
     ];
 

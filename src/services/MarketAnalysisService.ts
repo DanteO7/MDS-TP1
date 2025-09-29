@@ -1,4 +1,5 @@
 // Servicio de análisis de mercado
+import { Risks } from "../enums/Risks";
 import { Portfolio } from "../models/portfolio";
 import { RiskAnalysis } from "../models/risk-analysis";
 import { storage } from "../utils/storage";
@@ -18,13 +19,13 @@ export class MarketAnalysisService {
     const volatilityScore = this.calculateVolatilityScore(portfolio);
 
     // Determinar nivel de riesgo general
-    let portfolioRisk: "low" | "medium" | "high";
+    let portfolioRisk: Risks;
     if (volatilityScore < 30 && diversificationScore > 70) {
-      portfolioRisk = "low";
+      portfolioRisk = Risks.LOW;
     } else if (volatilityScore < 60 && diversificationScore > 40) {
-      portfolioRisk = "medium";
+      portfolioRisk = Risks.MEDIUM;
     } else {
-      portfolioRisk = "high";
+      portfolioRisk = Risks.HIGH;
     }
 
     // Generar recomendaciones básicas
@@ -229,20 +230,20 @@ export class MarketAnalysisService {
         let priority = 0;
 
         if (
-          user.riskTolerance === "low" &&
+          user.riskTolerance === Risks.LOW &&
           this.getAssetVolatility(asset.symbol) < 50
         ) {
           recommendation =
             "Activo de bajo riesgo recomendado para tu perfil conservador";
           priority = 1;
         } else if (
-          user.riskTolerance === "high" &&
+          user.riskTolerance === Risks.HIGH &&
           this.getAssetVolatility(asset.symbol) > 60
         ) {
           recommendation =
             "Activo de alto crecimiento potencial para tu perfil agresivo";
           priority = 2;
-        } else if (user.riskTolerance === "medium") {
+        } else if (user.riskTolerance === Risks.MEDIUM) {
           recommendation = "Activo balanceado adecuado para tu perfil moderado";
           priority = 1;
         }
@@ -255,7 +256,9 @@ export class MarketAnalysisService {
             recommendation: recommendation,
             priority: priority,
             riskLevel:
-              this.getAssetVolatility(asset.symbol) > 60 ? "high" : "medium",
+              this.getAssetVolatility(asset.symbol) > 60
+                ? Risks.HIGH
+                : Risks.MEDIUM,
           });
         }
       }

@@ -8,6 +8,7 @@ import apiRoutes from "./routes/api";
 import { requestLogger } from "./middleware/auth";
 import { MarketSimulationService } from "./services/market-simulation/MarketSimulationService";
 import { environmentConfig } from "./config/environment";
+import { MarketEventType } from "./enums/MarketEventType";
 
 // Crear aplicación Express
 const app = express();
@@ -129,7 +130,7 @@ function startServer() {
     // Iniciar simulación de mercado
     setTimeout(() => {
       marketSimulation.startMarketSimulation();
-      marketSimulation.simulateMarketEvent("bull"); // Simulamos un bull para que empiece con un +5% a +15%
+      marketSimulation.simulateMarketEvent(MarketEventType.BULL); // Simulamos un bull para que empiece con un +5% a +15%
       console.log(`\n📈 Simulación de mercado iniciada`);
 
       if (isDev) {

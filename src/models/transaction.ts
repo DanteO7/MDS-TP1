@@ -1,18 +1,21 @@
+import { TransactionStatus } from "../enums/TransactionStatus";
+import { TransactionType } from "../enums/TransactionType";
+
 export class Transaction {
   id: string;
   userId: string;
-  type: "buy" | "sell";
+  type: TransactionType;
   symbol: string;
   quantity: number;
   price: number;
   timestamp: Date;
   fees: number;
-  status: "pending" | "completed" | "failed";
+  status: TransactionStatus;
 
   constructor(
     id: string,
     userId: string,
-    type: "buy" | "sell",
+    type: TransactionType,
     symbol: string,
     quantity: number,
     price: number,
@@ -26,15 +29,15 @@ export class Transaction {
     this.price = price;
     this.fees = fees;
     this.timestamp = new Date();
-    this.status = "pending";
+    this.status = TransactionStatus.PENDING;
   }
 
   complete(): void {
-    this.status = "completed";
+    this.status = TransactionStatus.COMPLETED;
   }
 
   fail(): void {
-    this.status = "failed";
+    this.status = TransactionStatus.FAILED;
   }
 
   getTotalAmount(): number {
