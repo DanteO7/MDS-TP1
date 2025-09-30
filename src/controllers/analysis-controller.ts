@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { MarketAnalysisService } from "../services/MarketAnalysisService";
+import { MarketAnalysisService } from "../services/market-analysis/MarketAnalysisService";
 
 const analysisService = new MarketAnalysisService();
 

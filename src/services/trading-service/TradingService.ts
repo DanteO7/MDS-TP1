@@ -2,17 +2,16 @@
 
 import { storage } from "../../utils/storage";
 import { Transaction } from "../../models/transaction";
-import { BuyOrder } from "./template/BuyOrder";
 import { TransactionType } from "../../enums/TransactionType";
-import { SellOrder } from "./template/SellOrder";
+import { BuyOrderFactory, SellOrderFactory } from "./factory/orders-factory";
 export class TradingService {
-  // Ejecutar orden de compra al precio de mercado
+  // Ejecutar orden de compra al precio de mercado con factory
   async executeBuyOrder(
     userId: string,
     symbol: string,
     quantity: number
   ): Promise<Transaction> {
-    const buyOrder = new BuyOrder();
+    const buyOrder = new BuyOrderFactory();
     const transaction = buyOrder.execute(
       userId,
       symbol,
@@ -22,13 +21,13 @@ export class TradingService {
     return transaction;
   }
 
-  // Ejecutar orden de venta al precio de mercado
+  // Ejecutar orden de venta al precio de mercado con factory
   async executeSellOrder(
     userId: string,
     symbol: string,
     quantity: number
   ): Promise<Transaction> {
-    const sellOrder = new SellOrder();
+    const sellOrder = new SellOrderFactory();
     const transaction = sellOrder.execute(
       userId,
       symbol,

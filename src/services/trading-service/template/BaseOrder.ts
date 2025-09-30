@@ -5,8 +5,9 @@ import { Portfolio } from "../../../models/portfolio";
 import { Transaction } from "../../../models/transaction";
 import { User } from "../../../models/user";
 import { storage } from "../../../utils/storage";
+import { IExecutable } from "../factory/orders-factory";
 
-export abstract class BaseOrder {
+export abstract class BaseOrder implements IExecutable {
   execute(
     userId: string,
     symbol: string,

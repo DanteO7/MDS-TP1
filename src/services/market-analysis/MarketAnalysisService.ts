@@ -1,8 +1,8 @@
 // Servicio de análisis de mercado
-import { Risks } from "../enums/Risks";
-import { Portfolio } from "../models/portfolio";
-import { RiskAnalysis } from "../models/risk-analysis";
-import { storage } from "../utils/storage";
+import { Risks } from "../../enums/Risks";
+import { Portfolio } from "../../models/portfolio";
+import { RiskAnalysis } from "../../models/risk-analysis";
+import { storage } from "../../utils/storage";
 
 export class MarketAnalysisService {
   // Análisis de riesgo del portafolio
