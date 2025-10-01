@@ -1,7 +1,7 @@
 // Middleware de autenticación
 import { Request, Response, NextFunction } from "express";
-import { storage } from "../utils/storage";
 import { config } from "../config/config";
+import { UserStorage } from "../utils/facade/storage";
 
 // Extender Request para incluir user
 declare global {
@@ -36,8 +36,8 @@ export const authenticateApiKey = (
     });
   }
 
-  // Buscar usuario en storage
-  const user = storage.getUserByApiKey(apiKey);
+  // Buscar usuario en storage de usuario
+  const user = UserStorage.getByApiKey(apiKey);
   if (!user) {
     return res.status(401).json({
       error: "Usuario no encontrado",

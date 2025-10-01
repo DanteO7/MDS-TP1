@@ -1,9 +1,9 @@
 // Servicios de trading
 
-import { storage } from "../../utils/storage";
 import { Transaction } from "../../models/transaction";
 import { TransactionType } from "../../enums/TransactionType";
 import { BuyOrderFactory, SellOrderFactory } from "./factory/orders-factory";
+import { TransactionStorage } from "../../utils/facade/storage";
 export class TradingService {
   // Ejecutar orden de compra al precio de mercado con factory
   async executeBuyOrder(
@@ -39,6 +39,6 @@ export class TradingService {
 
   // Obtener historial de transacciones
   getTransactionHistory(userId: string): Transaction[] {
-    return storage.getTransactionsByUserId(userId);
+    return TransactionStorage.getByUserId(userId);
   }
 }

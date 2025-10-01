@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { storage } from "../utils/storage";
+import { UserStorage } from "../utils/facade/storage";
 
 export class UserController {
   static async getProfile(req: Request, res: Response) {
@@ -48,7 +48,7 @@ export class UserController {
       if (email) user.email = email;
       if (riskTolerance) user.riskTolerance = riskTolerance;
 
-      storage.updateUser(user);
+      UserStorage.update(user);
 
       res.json({
         message: "Perfil actualizado exitosamente",

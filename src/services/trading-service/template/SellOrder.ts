@@ -1,6 +1,6 @@
 import { TransactionType } from "../../../enums/TransactionType";
 import { User } from "../../../models/user";
-import { storage } from "../../../utils/storage";
+import { PortafolioStorage } from "../../../utils/facade/storage";
 import { BaseOrder } from "./BaseOrder";
 
 export class SellOrder extends BaseOrder {
@@ -14,7 +14,7 @@ export class SellOrder extends BaseOrder {
     totalCostOrNetAmount: number;
   } {
     // Verificar holdings suficientes
-    const portfolio = storage.getPortfolioByUserId(user.id);
+    const portfolio = PortafolioStorage.getByUserId(user.id);
     if (!portfolio) {
       throw new Error("Portafolio no encontrado");
     }

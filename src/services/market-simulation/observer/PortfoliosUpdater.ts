@@ -1,4 +1,8 @@
-import { storage } from "../../../utils/storage";
+import {
+  AssetStorage,
+  PortafolioStorage,
+  UserStorage,
+} from "../../../utils/facade/storage";
 import { IMarketObserver } from "./IMarketObserver";
 
 export class PortfoliosUpdater implements IMarketObserver {
@@ -10,17 +14,17 @@ export class PortfoliosUpdater implements IMarketObserver {
   private updateAllPortfolioValues(): void {
     // Obtener todos los usuarios y actualizar sus portafolios
     const allUsers = [
-      storage.getUserById("demo_user"),
-      storage.getUserById("admin_user"),
-      storage.getUserById("trader_user"),
+      UserStorage.getById("demo_user"),
+      UserStorage.getById("admin_user"),
+      UserStorage.getById("trader_user"),
     ].filter((user) => user !== undefined);
 
     allUsers.forEach((user) => {
       if (user) {
-        const portfolio = storage.getPortfolioByUserId(user.id);
+        const portfolio = PortafolioStorage.getByUserId(user.id);
         if (portfolio && portfolio.holdings.length > 0) {
           this.recalculatePortfolioValues(portfolio);
-          storage.updatePortfolio(portfolio);
+          PortafolioStorage.update(portfolio);
         }
       }
     });
@@ -32,7 +36,7 @@ export class PortfoliosUpdater implements IMarketObserver {
     let totalInvested = 0;
 
     portfolio.holdings.forEach((holding: any) => {
-      const asset = storage.getAssetBySymbol(holding.symbol);
+      const asset = AssetStorage.getBySymbol(holding.symbol);
       if (asset) {
         holding.currentValue = holding.quantity * asset.currentPrice;
         const invested = holding.quantity * holding.averagePrice;

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { storage } from "../utils/storage";
 import { TradingService } from "../services/trading-service/TradingService";
+import { AssetStorage } from "../utils/facade/storage";
 
 const tradingService = new TradingService();
 
@@ -26,7 +26,7 @@ export class TradingController {
     }
 
     // Verificar que el activo existe
-    const asset = storage.getAssetBySymbol(symbol.toUpperCase());
+    const asset = AssetStorage.getBySymbol(symbol.toUpperCase());
     if (!asset) {
       return res.status(404).json({
         error: "Activo no encontrado",

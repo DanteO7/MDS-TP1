@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { storage } from "../utils/storage";
+import { MarketDataStorage } from "../utils/facade/storage";
 
 export class MarketController {
   static async getPrices(req: Request, res: Response) {
     try {
-      const marketData = storage.getAllMarketData();
+      const marketData = MarketDataStorage.getAll();
 
       res.json({
         prices: marketData.map((data) => ({
@@ -28,7 +28,7 @@ export class MarketController {
   static async getPriceBySymbol(req: Request, res: Response) {
     try {
       const { symbol } = req.params;
-      const marketData = storage.getMarketDataBySymbol(symbol.toUpperCase());
+      const marketData = MarketDataStorage.getBySymbol(symbol.toUpperCase());
 
       if (!marketData) {
         return res.status(404).json({

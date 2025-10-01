@@ -4,7 +4,13 @@ import { Asset } from "../../../models/asset";
 import { Portfolio } from "../../../models/portfolio";
 import { Transaction } from "../../../models/transaction";
 import { User } from "../../../models/user";
-import { storage } from "../../../utils/storage";
+import {
+  AssetStorage,
+  MarketDataStorage,
+  PortafolioStorage,
+  TransactionStorage,
+  UserStorage,
+} from "../../../utils/facade/storage";
 import { IExecutable } from "../factory/orders-factory";
 
 export abstract class BaseOrder implements IExecutable {
@@ -44,7 +50,7 @@ export abstract class BaseOrder implements IExecutable {
   }
 
   private getUser(userId: string): User {
-    const user = storage.getUserById(userId);
+    const user = UserStorage.getById(userId);
     if (!user) {
       throw new Error("Usuario no encontrado");
     }
@@ -52,7 +58,7 @@ export abstract class BaseOrder implements IExecutable {
   }
 
   private getAsset(symbol: string): Asset {
-    const asset = storage.getAssetBySymbol(symbol);
+    const asset = AssetStorage.getBySymbol(symbol);
     if (!asset) {
       throw new Error("Activo no encontrado");
     }
@@ -95,10 +101,10 @@ export abstract class BaseOrder implements IExecutable {
   ): void {
     if (type === TransactionType.BUY) {
       user.deductBalance(totalCostOrNetAmount);
-      storage.updateUser(user);
+      UserStorage.update(user);
     } else {
       user.addBalance(totalCostOrNetAmount);
-      storage.updateUser(user);
+      UserStorage.update(user);
     }
   }
 
@@ -117,7 +123,7 @@ export abstract class BaseOrder implements IExecutable {
   }
 
   private saveTransaction(transaction: Transaction): void {
-    storage.addTransaction(transaction);
+    TransactionStorage.add(transaction);
   }
 
   private simulateMarket(
@@ -145,7 +151,7 @@ export abstract class BaseOrder implements IExecutable {
     quantity: number,
     action: TransactionType
   ): void {
-    const marketData = storage.getMarketDataBySymbol(symbol);
+    const marketData = MarketDataStorage.getBySymbol(symbol);
     if (!marketData) return;
 
     // Calcular impacto basado en volumen
@@ -166,14 +172,14 @@ export abstract class BaseOrder implements IExecutable {
     marketData.timestamp = new Date();
 
     // Actualizar asset también
-    const asset = storage.getAssetBySymbol(symbol);
+    const asset = AssetStorage.getBySymbol(symbol);
     if (asset) {
       asset.currentPrice = newPrice;
       asset.lastUpdated = new Date();
-      storage.updateAsset(asset);
+      AssetStorage.update(asset);
     }
 
-    storage.updateMarketData(marketData);
+    MarketDataStorage.update(marketData);
   }
 
   // Generar ID único para transacciones
@@ -188,7 +194,7 @@ export abstract class BaseOrder implements IExecutable {
     quantity: number,
     price: number
   ): void {
-    const portfolio = storage.getPortfolioByUserId(userId);
+    const portfolio = PortafolioStorage.getByUserId(userId);
     if (!portfolio) return;
 
     // Agregar las acciones al portafolio
@@ -197,7 +203,7 @@ export abstract class BaseOrder implements IExecutable {
     // Recalcular valores actuales
     this.recalculatePortfolioValues(portfolio);
 
-    storage.updatePortfolio(portfolio);
+    PortafolioStorage.update(portfolio);
   }
 
   // Actualizar portafolio después de venta
@@ -207,7 +213,7 @@ export abstract class BaseOrder implements IExecutable {
     quantity: number,
     price: number
   ): void {
-    const portfolio = storage.getPortfolioByUserId(userId);
+    const portfolio = PortafolioStorage.getByUserId(userId);
     if (!portfolio) return;
 
     // Remover las acciones del portafolio
@@ -216,14 +222,14 @@ export abstract class BaseOrder implements IExecutable {
     // Recalcular valores actuales
     this.recalculatePortfolioValues(portfolio);
 
-    storage.updatePortfolio(portfolio);
+    PortafolioStorage.update(portfolio);
   }
 
   // Recalcular valores del portafolio
   private recalculatePortfolioValues(portfolio: Portfolio): void {
     // Actualizar el valor actual de cada holding
     portfolio.holdings.forEach((holding) => {
-      const asset = storage.getAssetBySymbol(holding.symbol);
+      const asset = AssetStorage.getBySymbol(holding.symbol);
       if (asset) {
         holding.updateCurrentValue(asset.currentPrice);
       }

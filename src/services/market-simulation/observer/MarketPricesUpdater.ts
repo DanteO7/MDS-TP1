@@ -1,5 +1,5 @@
 import { config } from "../../../config/config";
-import { storage } from "../../../utils/storage";
+import { AssetStorage, MarketDataStorage } from "../../../utils/facade/storage";
 import { IMarketObserver } from "./IMarketObserver";
 
 export class MarketPricesUpdater implements IMarketObserver {
@@ -9,7 +9,7 @@ export class MarketPricesUpdater implements IMarketObserver {
 
   // Actualizar precios de mercado
   private updateMarketPrices(impactFactor: number): void {
-    const allMarketData = storage.getAllMarketData();
+    const allMarketData = MarketDataStorage.getAll();
 
     allMarketData.forEach((marketData) => {
       // Generar cambio aleatorio de precio
@@ -30,14 +30,14 @@ export class MarketPricesUpdater implements IMarketObserver {
       marketData.volume += Math.floor(Math.random() * 10000); // Simular volumen
       marketData.timestamp = new Date();
 
-      storage.updateMarketData(marketData);
+      MarketDataStorage.update(marketData);
 
       // Actualizar asset correspondiente
-      const asset = storage.getAssetBySymbol(marketData.symbol);
+      const asset = AssetStorage.getBySymbol(marketData.symbol);
       if (asset) {
         asset.currentPrice = newPrice;
         asset.lastUpdated = new Date();
-        storage.updateAsset(asset);
+        AssetStorage.update(asset);
       }
     });
   }

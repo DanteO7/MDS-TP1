@@ -2,12 +2,17 @@
 import { Risks } from "../../enums/Risks";
 import { Portfolio } from "../../models/portfolio";
 import { RiskAnalysis } from "../../models/risk-analysis";
-import { storage } from "../../utils/storage";
+import {
+  AssetStorage,
+  MarketDataStorage,
+  PortafolioStorage,
+  UserStorage,
+} from "../../utils/facade/storage";
 
 export class MarketAnalysisService {
   // Análisis de riesgo del portafolio
   analyzePortfolioRisk(userId: string): RiskAnalysis {
-    const portfolio = storage.getPortfolioByUserId(userId);
+    const portfolio = PortafolioStorage.getByUserId(userId);
     if (!portfolio) {
       throw new Error("Portafolio no encontrado");
     }
@@ -52,7 +57,7 @@ export class MarketAnalysisService {
     // Contar sectores únicos
     const sectors = new Set<string>();
     portfolio.holdings.forEach((holding) => {
-      const asset = storage.getAssetBySymbol(holding.symbol);
+      const asset = AssetStorage.getBySymbol(holding.symbol);
       if (asset) {
         sectors.add(asset.sector);
       }
@@ -99,7 +104,7 @@ export class MarketAnalysisService {
   // Obtener volatilidad de un activo - Datos simulados
   private getAssetVolatility(symbol: string): number {
     // Simulación básica de volatilidad por sector
-    const asset = storage.getAssetBySymbol(symbol);
+    const asset = AssetStorage.getBySymbol(symbol);
     if (!asset) return 50; // Volatilidad por defecto
 
     const volatilityBySector: { [key: string]: number } = {
@@ -157,7 +162,7 @@ export class MarketAnalysisService {
 
   // Análisis técnico básico
   performTechnicalAnalysis(symbol: string): any {
-    const marketData = storage.getMarketDataBySymbol(symbol);
+    const marketData = MarketDataStorage.getBySymbol(symbol);
     if (!marketData) {
       throw new Error("Datos de mercado no encontrados");
     }
@@ -192,7 +197,7 @@ export class MarketAnalysisService {
     symbol: string,
     periods: number
   ): number {
-    const marketData = storage.getMarketDataBySymbol(symbol);
+    const marketData = MarketDataStorage.getBySymbol(symbol);
     if (!marketData) return 0;
 
     // Simulación: SMA = precio actual +/- variación aleatoria
@@ -208,8 +213,8 @@ export class MarketAnalysisService {
 
   // Generar recomendaciones de inversión - Lógica básica
   generateInvestmentRecommendations(userId: string): any[] {
-    const user = storage.getUserById(userId);
-    const portfolio = storage.getPortfolioByUserId(userId);
+    const user = UserStorage.getById(userId);
+    const portfolio = PortafolioStorage.getByUserId(userId);
 
     if (!user || !portfolio) {
       throw new Error("Usuario o portafolio no encontrado");
@@ -218,7 +223,7 @@ export class MarketAnalysisService {
     const recommendations: any[] = [];
 
     // Recomendaciones basadas en tolerancia al riesgo
-    const allAssets = storage.getAllAssets();
+    const allAssets = AssetStorage.getAll();
 
     allAssets.forEach((asset) => {
       const hasHolding = portfolio.holdings.some(
