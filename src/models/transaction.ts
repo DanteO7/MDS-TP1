@@ -1,5 +1,5 @@
-import { TransactionStatus } from "../enums/TransactionStatus";
-import { TransactionType } from "../enums/TransactionType";
+import { TransactionStatus } from "@/enums/transaction-status";
+import { TransactionType } from "@/enums/transaction-type";
 
 export class Transaction {
   id: string;

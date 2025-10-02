@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { MarketDataStorage } from "../utils/facade/storage";
+import { MarketDataStorage } from "@/utils/facade/storage";
 
 export class MarketController {
   static async getPrices(req: Request, res: Response) {

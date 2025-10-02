@@ -1,4 +1,4 @@
-import { Transaction } from "../../models/transaction";
+import { Transaction } from "@/models/transaction";
 import { InMemoryStorage } from "./storage";
 
 export class TransactionFacade {

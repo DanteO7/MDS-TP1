@@ -1,4 +1,4 @@
-import { Risks } from "../enums/Risks";
+import { Risks } from "@/enums/risks";
 
 export class RiskAnalysis {
   userId: string;

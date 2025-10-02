@@ -14,8 +14,12 @@
     "declarationMap": true,
     "sourceMap": true,
     "types": ["node"],
-    "moduleResolution": "node16"
+    "moduleResolution": "node16",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/services/trading-service/template/BaseOrder.ts"],
   "exclude": ["node_modules", "dist"]
 }

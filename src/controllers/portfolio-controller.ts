@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AssetStorage, PortafolioStorage } from "../utils/facade/storage";
+import { AssetStorage, PortafolioStorage } from "@/utils/facade/storage";
 
 export class PortfolioController {
   static async getPortfolio(req: Request, res: Response) {

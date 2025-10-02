@@ -1,7 +1,7 @@
-import { TransactionType } from "../../../enums/TransactionType";
-import { Transaction } from "../../../models/transaction";
-import { BuyOrder } from "../template/BuyOrder";
-import { SellOrder } from "../template/SellOrder";
+import { TransactionType } from "@/enums/transaction-type";
+import { Transaction } from "@/models/transaction";
+import { BuyOrder } from "../template/buy-order";
+import { SellOrder } from "../template/sell-order";
 
 export interface IExecutable {
   execute(

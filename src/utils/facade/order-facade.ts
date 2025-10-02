@@ -1,4 +1,4 @@
-import { Order } from "../../models/order";
+import { Order } from "@/models/order";
 import { InMemoryStorage } from "./storage";
 
 export class OrderFacade {

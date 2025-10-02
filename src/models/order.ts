@@ -1,5 +1,5 @@
-import { OrderStatus } from "../enums/OrderStatus";
-import { TransactionType } from "../enums/TransactionType";
+import { OrderStatus } from "@/enums/order-status";
+import { TransactionType } from "@/enums/transaction-type";
 
 export class Order {
   id: string;

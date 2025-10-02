@@ -1,6 +1,6 @@
-import { config } from "../../../config/config";
-import { AssetStorage, MarketDataStorage } from "../../../utils/facade/storage";
-import { IMarketObserver } from "./IMarketObserver";
+import { config } from "@/config/config";
+import { AssetStorage, MarketDataStorage } from "@/utils/facade/storage";
+import { IMarketObserver } from "./market-observer";
 
 export class MarketPricesUpdater implements IMarketObserver {
   update(impactFactor = 1): void {

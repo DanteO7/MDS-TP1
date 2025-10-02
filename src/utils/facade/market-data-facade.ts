@@ -1,4 +1,4 @@
-import { MarketData } from "../../models/market-data";
+import { MarketData } from "@/models/market-data";
 import { InMemoryStorage } from "./storage";
 
 export class MarketDataFacade {

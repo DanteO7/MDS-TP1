@@ -1,4 +1,4 @@
-import { Portfolio } from "../../models/portfolio";
+import { Portfolio } from "@/models/portfolio";
 import { InMemoryStorage } from "./storage";
 
 export class PortafolioFacade {

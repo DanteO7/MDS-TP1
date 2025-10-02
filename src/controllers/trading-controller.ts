@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { TradingService } from "../services/trading-service/TradingService";
-import { AssetStorage } from "../utils/facade/storage";
+import { TradingService } from "@/services/trading-service/trading-service";
+import { AssetStorage } from "@/utils/facade/storage";
 
 const tradingService = new TradingService();
 

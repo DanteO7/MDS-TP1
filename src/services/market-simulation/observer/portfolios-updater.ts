@@ -2,8 +2,8 @@ import {
   AssetStorage,
   PortafolioStorage,
   UserStorage,
-} from "../../../utils/facade/storage";
-import { IMarketObserver } from "./IMarketObserver";
+} from "@/utils/facade/storage";
+import { IMarketObserver } from "./market-observer";
 
 export class PortfoliosUpdater implements IMarketObserver {
   update(): void {

@@ -1,13 +1,13 @@
 // Almacenamiento en memoria
 
-import { config } from "../../config/config";
-import { Risks } from "../../enums/Risks";
-import { Asset } from "../../models/asset";
-import { MarketData } from "../../models/market-data";
-import { Order } from "../../models/order";
-import { Portfolio } from "../../models/portfolio";
-import { Transaction } from "../../models/transaction";
-import { User } from "../../models/user";
+import { config } from "@/config/config";
+import { Risks } from "@/enums/risks";
+import { Asset } from "@/models/asset";
+import { MarketData } from "@/models/market-data";
+import { Order } from "@/models/order";
+import { Portfolio } from "@/models/portfolio";
+import { Transaction } from "@/models/transaction";
+import { User } from "@/models/user";
 import { AssetFacade } from "./asset-facade";
 import { MarketDataFacade } from "./market-data-facade";
 import { OrderFacade } from "./order-facade";

@@ -1,5 +1,5 @@
-import { Portfolio } from "../../models/portfolio";
-import { AssetStorage, MarketDataStorage } from "../../utils/facade/storage";
+import { Portfolio } from "@/models/portfolio";
+import { AssetStorage, MarketDataStorage } from "@/utils/facade/storage";
 
 export class HelperAnalysis {
   // Calcular score de diversificación - Algoritmo simplificado

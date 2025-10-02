@@ -1,9 +1,8 @@
 // Servicios de trading
-
-import { Transaction } from "../../models/transaction";
-import { TransactionType } from "../../enums/TransactionType";
+import { Transaction } from "@/models/transaction";
+import { TransactionType } from "@/enums/transaction-type";
 import { BuyOrderFactory, SellOrderFactory } from "./factory/orders-factory";
-import { TransactionStorage } from "../../utils/facade/storage";
+import { TransactionStorage } from "@/utils/facade/storage";
 export class TradingService {
   // Ejecutar orden de compra al precio de mercado con factory
   async executeBuyOrder(

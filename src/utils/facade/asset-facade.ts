@@ -1,4 +1,4 @@
-import { Asset } from "../../models/asset";
+import { Asset } from "@/models/asset";
 import { InMemoryStorage } from "./storage";
 
 export class AssetFacade {

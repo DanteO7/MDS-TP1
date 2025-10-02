@@ -1,6 +1,6 @@
-import { TransactionType } from "../../../enums/TransactionType";
-import { User } from "../../../models/user";
-import { BaseOrder } from "./BaseOrder";
+import { TransactionType } from "@/enums/transaction-type";
+import { User } from "@/models/user";
+import { BaseOrder } from "./base-order";
 
 export class BuyOrder extends BaseOrder {
   protected prepareTransactionDetails(

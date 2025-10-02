@@ -1,9 +1,9 @@
 // Servicio de simulación de mercado
-import { config } from "../../config/config";
-import { MarketEventType } from "../../enums/MarketEventType";
-import { IMarketObserver } from "./observer/IMarketObserver";
-import { MarketPricesUpdater } from "./observer/MarketPricesUpdater";
-import { PortfoliosUpdater } from "./observer/PortfoliosUpdater";
+import { config } from "@/config/config";
+import { MarketEventType } from "@/enums/market-event-type";
+import { IMarketObserver } from "./observer/market-observer";
+import { MarketPricesUpdater } from "./observer/market-prices-updater";
+import { PortfoliosUpdater } from "./observer/portfolios-updater";
 
 export class MarketSimulationService {
   private isRunning: boolean = false;

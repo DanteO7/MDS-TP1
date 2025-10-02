@@ -1,7 +1,7 @@
-import { TransactionType } from "../../../enums/TransactionType";
-import { User } from "../../../models/user";
-import { PortafolioStorage } from "../../../utils/facade/storage";
-import { BaseOrder } from "./BaseOrder";
+import { TransactionType } from "@/enums/transaction-type";
+import { User } from "@/models/user";
+import { PortafolioStorage } from "@/utils/facade/storage";
+import { BaseOrder } from "./base-order";
 
 export class SellOrder extends BaseOrder {
   protected prepareTransactionDetails(

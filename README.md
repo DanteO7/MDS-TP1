@@ -66,6 +66,7 @@ Esta API simula un broker financiero que permite realizar operaciones de trading
 
    ```bash
    npm install
+   npm install tsconfig-paths # para el alias de los path
    ```
 
 3. **Compilar el proyecto (opcional)**

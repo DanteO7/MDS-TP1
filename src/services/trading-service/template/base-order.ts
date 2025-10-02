@@ -1,16 +1,16 @@
-import { config } from "../../../config/config";
-import { TransactionType } from "../../../enums/TransactionType";
-import { Asset } from "../../../models/asset";
-import { Portfolio } from "../../../models/portfolio";
-import { Transaction } from "../../../models/transaction";
-import { User } from "../../../models/user";
+import { config } from "@/config/config";
+import { TransactionType } from "@/enums/transaction-type";
+import { Asset } from "@/models/asset";
+import { Portfolio } from "@/models/portfolio";
+import { Transaction } from "@/models/transaction";
+import { User } from "@/models/user";
 import {
   AssetStorage,
   MarketDataStorage,
   PortafolioStorage,
   TransactionStorage,
   UserStorage,
-} from "../../../utils/facade/storage";
+} from "@/utils/facade/storage";
 import { IExecutable } from "../factory/orders-factory";
 
 export abstract class BaseOrder implements IExecutable {

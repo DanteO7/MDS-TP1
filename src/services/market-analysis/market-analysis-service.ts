@@ -1,14 +1,14 @@
 // Servicio de análisis de mercado
-import { Risks } from "../../enums/Risks";
+import { Risks } from "@/enums/risks";
 import { HelperAnalysis } from "./helper-analysis";
-import { RiskAnalysis } from "../../models/risk-analysis";
-import { TransactionType } from "../../enums/TransactionType";
+import { RiskAnalysis } from "@/models/risk-analysis";
+import { TransactionType } from "@/enums/transaction-type";
 import {
   AssetStorage,
   MarketDataStorage,
   PortafolioStorage,
   UserStorage,
-} from "../../utils/facade/storage";
+} from "@/utils/facade/storage";
 
 export class MarketAnalysisService {
   // Análisis de riesgo del portafolio

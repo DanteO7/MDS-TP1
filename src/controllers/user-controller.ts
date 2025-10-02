@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserStorage } from "../utils/facade/storage";
+import { UserStorage } from "@/utils/facade/storage";
 
 export class UserController {
   static async getProfile(req: Request, res: Response) {

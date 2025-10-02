@@ -1,7 +1,7 @@
 // Middleware de autenticación
 import { Request, Response, NextFunction } from "express";
-import { config } from "../config/config";
-import { UserStorage } from "../utils/facade/storage";
+import { config } from "@/config/config";
+import { UserStorage } from "@/utils/facade/storage";
 
 // Extender Request para incluir user
 declare global {
