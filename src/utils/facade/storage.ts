@@ -1,7 +1,7 @@
 // Almacenamiento en memoria
 
 import { config } from "@/config/config";
-import { Risks } from "@/enums/risks";
+import { Risks } from "@/enums/risks-type";
 import { Asset } from "@/models/asset";
 import { MarketData } from "@/models/market-data";
 import { Order } from "@/models/order";

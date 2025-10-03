@@ -1,5 +1,5 @@
 // Servicio de análisis de mercado
-import { Risks } from "@/enums/risks";
+import { Risks } from "@/enums/risks-type";
 import { HelperAnalysis } from "./helper-analysis";
 import { RiskAnalysis } from "@/models/risk-analysis";
 import { TransactionType } from "@/enums/transaction-type";
